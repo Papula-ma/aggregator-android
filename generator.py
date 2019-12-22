@@ -41,7 +41,7 @@ def process_content():
                     generate_html(content)
 
             else:
-                print 'copying', file_path
+                print(f"""Copying {file_path}""")
                 shutil.copy(file_path, os.path.join('../gh-pages', file_path))
 
     generate_rss(news)
@@ -49,7 +49,7 @@ def process_content():
 
 def load_content(file_path):
     if file_path not in CONTENTS:
-        print 'loading', file_path
+        print(f"""Loading {file_path}""")
 
         with codecs.open(file_path, mode='r', encoding='utf-8') as reader:
             content = CONTENTS[file_path] = {
@@ -80,7 +80,7 @@ def generate_html(content):
     content_type = content['type']
     content_file = content['file']
 
-    print 'generating', content_type, 'from', content_file
+    print(f"""Generating {content_type} from {content_file}""")
 
     template = TEMPLATES[content_type]
 
@@ -92,7 +92,7 @@ def generate_rss(news):
     if not news:
         return
 
-    print 'generating rss news'
+    print(f"""Generating RSS""")
 
     template = TEMPLATES['news']
 
@@ -107,15 +107,16 @@ def generate_rss(news):
 
 
 if __name__ == '__main__':
-    print 'deleting generated files'
+    print(f"""Deleting generated files""")
     for root, dirs, files in reversed([x for x in os.walk('gh-pages')]):
         for file_name in files:
             if root == 'gh-pages' and file_name.startswith('.'):
                 continue
-            print "rm", os.path.join(root, file_name)
+            print(f"""Deleting file: {os.path.join(root, file_name)}""")
             os.remove(os.path.join(root, file_name))
         if root != 'gh-pages':
-            print "rm", root
+            print(f"""Deleting directory: {root}""")
             os.rmdir(root)
 
     process_content()
+
