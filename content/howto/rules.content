@@ -27,7 +27,7 @@ the overflow menu.*
 
 *HINT: Long pressing an icon in the action bar reveals the action name.*
 
-Excluding all entries except the whished ones
+Excluding all entries except the wished ones
 ---------------------------------------------
 
 This is achieved by defining at least two rules:
